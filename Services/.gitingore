@@ -1,0 +1,128 @@
+# ─────────────────────────────
+# Demiurge Forge — .gitignore
+# ─────────────────────────────
+
+# SO / Editor / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Logs e temporários genéricos
+*.log
+logs/
+*.tmp
+*.swp
+*.swo
+*.cache
+.cache/
+tmp/
+temp/
+
+# ── Python
+__pycache__/
+*.py[cod]
+*$py.class
+.python-version
+.venv/
+venv/
+env/
+ENV/
+pip-wheel-metadata/
+dist/
+build/
+*.egg-info/
+.eggs/
+.wheelhouse/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+.coverage.*
+.cache/
+coverage.xml
+htmlcov/
+.ipynb_checkpoints/
+
+# ── Node / Frontend (Next.js/React)
+node_modules/
+.npm/
+.pnpm-store/
+.yarn/
+.yarn-cache/
+.yarnrc.yml
+# (mantenha os lockfiles no repo)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Next.js / ferramentas
+.next/
+out/
+.vercel/
+.turbo/
+.parcel-cache/
+
+# Bundles genéricos
+*.map
+*.bundle.*
+*.min.*
+
+# ── Docker / Compose
+# (mantém Dockerfile e compose no repo)
+docker-data/
+.docker/
+# arquivos de env (expor só o exemplo)
+.env
+.env.*
+!.env.example
+
+# Volumes/artefatos de serviços (se usar locais no repo)
+data/
+storage/
+uploads/
+minio-data/
+postgres-data/
+redis-data/
+qdrant-data/
+
+# ── Testes/coverage multiplataforma
+coverage/
+.junit/
+test-results/
+
+# ── Imagens/modelos grandes (se gerar artefatos locais)
+*.bin
+*.pt
+*.onnx
+*.ckpt
+*.mlmodel
+
+# ── Terraform (se usar IaC)
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.lock.hcl
+
+# ── Arquivos de projeto específicos (ajuste se precisar)
+# backups e dumps
+backups/
+*.sql
+*.dump
+
+# Editor específicos adicionais
+*.iml
+.vscode-test/
+
+# ── Sistema de build do Python moderno (uv/hatch/poetry)
+# (mantenha os lockfiles no repo!)
+# uv.lock
+# poetry.lock
