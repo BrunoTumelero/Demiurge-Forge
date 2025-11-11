@@ -126,3 +126,7 @@ backups/
 # (mantenha os lockfiles no repo!)
 # uv.lock
 # poetry.lock
+
+# arq
+*.pdf
+

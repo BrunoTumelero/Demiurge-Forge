@@ -8,6 +8,9 @@ app.include_router(health_router, tags=["health"])
 app.include_router(pdfs_router, prefix="/v1", tags=["pdfs"])
 
 
-@app.get("/healthz")
-def health_check():
-    return {"status": "ok"}
+@app.on_event("startup")
+async def _show_routes():
+    print("=== ROUTES REGISTRADAS ===")
+    for r in app.router.routes:
+        methods = getattr(r, "methods", None)
+        print(methods, r.path)

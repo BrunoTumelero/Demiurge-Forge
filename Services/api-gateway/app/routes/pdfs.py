@@ -5,9 +5,13 @@ from app.integrations.minio_client import ensure_bucket, put_object
 from app.db.postgres import insert_pdf
 from app.schemas.pdf import PDFUploadResponse
 
-router = APIRouter()
+router = APIRouter(prefix="/pdfs", tags=["PDFs"])
 
-@router.post("/pdfs", response_model=PDFUploadResponse)
+@router.get("/ping")
+def ping():
+    return {"ok": True}
+
+@router.post("/upload", response_model=PDFUploadResponse)
 async def upload_pdf(file: UploadFile = File(...)):
     if file.content_type != "application/pdf":
         raise HTTPException(status_code=415, detail="Apenas application/pdf")
@@ -20,7 +24,7 @@ async def upload_pdf(file: UploadFile = File(...)):
         raise HTTPException(status_code=413, detail="PDF muito grande (>100MB)")
 
     pdf_id = str(uuid.uuid4())
-    user_id = "u_demo"  # TODO: pegar do auth quando existir
+    user_id = "u_demo"  # To-do: pegar do auth quando existir
     key = f"pdfs/{user_id}/{pdf_id}.pdf"
     bucket = settings.PDF_BUCKET
     ensure_bucket(bucket)
