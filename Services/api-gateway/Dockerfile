@@ -11,7 +11,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 #copy the code
 COPY . .
-ENV PYTHONPATH=/usr/src/app
+COPY ./.env /usr/src/app/.env
+#ENV PYTHONPATH=/usr/src/app
 
 #RUN adduser --disabled-password appuser
 #USER appuser

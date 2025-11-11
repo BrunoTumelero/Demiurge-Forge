@@ -3,14 +3,17 @@ from app.core.settings import settings
 
 _client = None
 
+secure = getattr(settings, "S3_SECURE", "false")
+secure = str(secure).lower() == "true"
+
 def client() -> Minio:
     global _client
     if _client is None:
         _client = Minio(
-            settings.MINIO_ENDPOINT.replace("http://", "").replace("https://", ""),
+            settings.MINIO_ENDPOINT,
             access_key=settings.MINIO_ACCESS_KEY,
             secret_key=settings.MINIO_SECRET_KEY,
-            secure=settings.MINIO_ENDPOINT.startswith("https"),
+            secure=secure,
         )
     return _client
 
@@ -23,6 +26,7 @@ def ensure_bucket(name: str):
     c = client()
     if not c.bucket_exists(name):
         c.make_bucket(name)
+    return c
 
 def put_object(bucket: str, key: str, data, length: int, content_type: str):
     res = client().put_object(bucket, key, data, length, content_type=content_type)
